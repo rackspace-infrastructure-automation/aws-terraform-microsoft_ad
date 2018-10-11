@@ -10,12 +10,8 @@ jobs:
             path: ~/branches/${CIRCLE_BRANCH}
       - run: mkdir -p ~/workspace/plan_results
       - run: ln -s ~/branches/${CIRCLE_BRANCH} ~/module
-      - run: cp -pr ~/module/.circleci/templates ~/templates
       - run: cp -pr ~/module/.circleci/bin ~/bin
       - run: chmod +x ~/bin/*.sh
-      - run:
-          name: check tests for s3 backends
-          command: cd ~ && ~/bin/s3_backend_check.sh
       - run:
           name: switch symlink to master branch
           command: cd ~ && ~/bin/check_master_tests.sh
@@ -91,6 +87,7 @@ jobs:
       - checkout:
             path: ~/module
       - run: cp -pr ~/module/.circleci/bin ~/bin
+      - run: chmod +x ~/bin/*.sh
       - run:
           name: raise errors if destroy detected
           command: cd ~ && ~/bin/raise.sh
