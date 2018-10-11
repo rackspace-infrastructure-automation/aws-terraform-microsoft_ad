@@ -22,7 +22,7 @@ for LAYER in $LAYERS; do
   # layer (minus state file) and copy files from test
 
   if [ -d "${TESTS_DIR}/${LAYER}" ]; then
-    find "$LAYERS_DIR/$LAYER" ! -name '*.tfstate' -maxdepth 1 -type f -exec rm -f {} +
+    find "$LAYERS_DIR/$LAYER" \( -name '*.tf' -o -name '*.tfvars' \) ! -name '*.tfstate' ! -name 's3_backend.tf' -maxdepth 1 -type f -exec rm -f {} +
     cp ${TESTS_DIR}/${LAYER}/*.tf ${LAYERS_DIR}/${LAYER}/
   fi
 

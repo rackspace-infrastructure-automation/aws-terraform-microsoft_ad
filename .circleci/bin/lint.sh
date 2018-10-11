@@ -1,7 +1,5 @@
 #!/bin/sh
 
-set -e
-
 WORKING_DIR=$(pwd)
 LAYERS_DIR="$WORKING_DIR/layers"
 LAYERS=$(find "$LAYERS_DIR"/* -maxdepth 0 -type d -exec basename '{}' \; | sort -n)
