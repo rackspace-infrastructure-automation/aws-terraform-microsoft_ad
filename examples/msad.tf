@@ -16,7 +16,7 @@ module "vpc" {
 }
 
 module "msad" {
-  source     = "git@github.com:rackspace-infrastructure-automation/aws-terraform-microsoft_ad//?ref=v0.0.1"
+  source     = "git@github.com:rackspace-infrastructure-automation/aws-terraform-microsoft_ad//?ref=v0.0.2"
   name       = "corp.example.local"
   password   = "${data.aws_kms_secrets.ad_credentials.plaintext["password"]}"
   vpc_id     = "${module.vpc.vpc_id}"
