@@ -33,11 +33,13 @@ variable "alias" {
 variable "description" {
   description = "A textual description for the directory (OPTIONAL)"
   default     = ""
+  type        = "string"
 }
 
 variable "short_name" {
   description = "The NetBIOS name for your domain, such as CORP. If you don't specify a value, AWS Directory Service uses the first part of your directory DNS server name. For example, if your directory DNS server name is corp.example.com, AWS Directory Service specifies CORP for the NetBIOS name."
   default     = ""
+  type        = "string"
 }
 
 variable "enable_sso" {
