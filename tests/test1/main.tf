@@ -1,6 +1,6 @@
 provider "aws" {
-  version = "~> 1.2"
   region  = "us-west-2"
+  version = "~> 2.1"
 }
 
 resource "random_string" "password" {
@@ -27,10 +27,11 @@ module "vpc" {
 module "msad" {
   source     = "../../module"
   name       = "corp.example.local"
-  password   = "${random_string.password.result}"
-  vpc_id     = "${module.vpc.vpc_id}"
-  subnet_ids = "${module.vpc.private_subnets}"
+  password   = random_string.password.result
+  vpc_id     = module.vpc.vpc_id
+  subnet_ids = module.vpc.private_subnets
   alias      = "${random_string.alias_name.result}-examplead"
   short_name = "corp"
   enable_sso = "true"
 }
+

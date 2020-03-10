@@ -1,6 +1,6 @@
 provider "aws" {
-  version = "~> 1.2"
   region  = "us-east-1"
+  version = "~> 2.1"
 }
 
 data "aws_kms_secrets" "ad_credentials" {
@@ -18,8 +18,9 @@ module "vpc" {
 module "msad" {
   source     = "git@github.com:rackspace-infrastructure-automation/aws-terraform-microsoft_ad//?ref=v0.0.2"
   name       = "corp.example.local"
-  password   = "${data.aws_kms_secrets.ad_credentials.plaintext["password"]}"
-  vpc_id     = "${module.vpc.vpc_id}"
-  subnet_ids = "${module.vpc.private_subnets}"
+  password   = data.aws_kms_secrets.ad_credentials.plaintext["password"]
+  vpc_id     = module.vpc.vpc_id
+  subnet_ids = module.vpc.private_subnets
   short_name = "corp"
 }
+
