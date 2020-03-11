@@ -20,8 +20,8 @@ resource "random_string" "alias_name" {
 }
 
 module "vpc" {
-  source   = "git@github.com:rackspace-infrastructure-automation/aws-terraform-vpc_basenetwork//?ref=v0.0.4"
-  vpc_name = "ad_vpc"
+  source   = "git@github.com:rackspace-infrastructure-automation/aws-terraform-vpc_basenetwork//?ref=v0.12.0"
+  name     = "ad_vpc"
 }
 
 module "msad" {
