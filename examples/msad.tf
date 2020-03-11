@@ -1,25 +1,32 @@
-provider "aws" {
-  version = "~> 1.2"
-  region  = "us-east-1"
+terraform {
+  required_version = ">= 0.12"
 }
 
-data "aws_kms_secrets" "ad_credentials" {
-  secret {
-    name    = "password"
-    payload = "AQICAHgna1G9z6AbpJYgDg7ULfBhI3sp9slmmTq83jFjJwohCAEEB9ZauMcEh9fdXAyp6Bd0AAAAbjBsBgkqhkiG9w0BBwagXzBdAgEAMFgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMeCgi8fGMf98ZkLFWAgEQgCvEJVnmyR/ZhmKn+oxEE2mVIzhauitVAtIhS4+LQa6zHmGWLXQQCChPHAVc"
-  }
+provider "aws" {
+  region  = "us-east-1"
+  version = "~> 2.1"
+}
+
+resource "random_string" "rstring" {
+  length  = 18
+  special = true
+  upper   = false
 }
 
 module "vpc" {
-  source   = "git@github.com:rackspace-infrastructure-automation/aws-terraform-vpc_basenetwork//?ref=v0.0.4"
-  vpc_name = "ad_vpc"
+  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-vpc_basenetwork//?ref=v0.12.0"
+
+  name = "ad_vpc"
 }
 
 module "msad" {
-  source     = "git@github.com:rackspace-infrastructure-automation/aws-terraform-microsoft_ad//?ref=v0.0.2"
+  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-microsoft_ad//?ref=v0.12.0"
+
   name       = "corp.example.local"
-  password   = "${data.aws_kms_secrets.ad_credentials.plaintext["password"]}"
-  vpc_id     = "${module.vpc.vpc_id}"
-  subnet_ids = "${module.vpc.private_subnets}"
+  password   = random_string.rstring.result
   short_name = "corp"
+  subnet_ids = module.vpc.private_subnets
+  vpc_id     = module.vpc.vpc_id
 }
+
+
