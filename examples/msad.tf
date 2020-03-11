@@ -5,22 +5,24 @@ provider "aws" {
 
 resource "random_string" "rstring" {
   length  = 18
-  upper   = false
   special = true
+  upper   = false
 }
 
 module "vpc" {
   source   = "git@github.com:rackspace-infrastructure-automation/aws-terraform-vpc_basenetwork//?ref=v0.12.0"
+
   name     = "ad_vpc"
 }
 
 module "msad" {
   source     = "git@github.com:rackspace-infrastructure-automation/aws-terraform-microsoft_ad//?ref=v0.12.0"
+
   name       = "corp.example.local"
   password   = random_string.rstring.result
-  vpc_id     = module.vpc.vpc_id
-  subnet_ids = module.vpc.private_subnets
   short_name = "corp"
+  subnet_ids = module.vpc.private_subnets
+  vpc_id     = module.vpc.vpc_id
 }
 
 

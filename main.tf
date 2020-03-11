@@ -20,22 +20,22 @@
 resource "aws_directory_service_directory" "msad" {
   alias       = var.alias
   description = var.description
+  edition     = var.edition
   enable_sso  = var.enable_sso
   name        = var.name
   password    = var.password
-  edition     = var.edition
-  type        = "MicrosoftAD"
   short_name  = var.short_name
+  type        = "MicrosoftAD"
 
   vpc_settings {
-    vpc_id     = var.vpc_id
     subnet_ids = var.subnet_ids
+    vpc_id     = var.vpc_id
   }
 
   tags = {
-    ServiceProvider = "Rackspace"
     Environment     = var.environment
     Name            = var.name
+    ServiceProvider = "Rackspace"
   }
 }
 
