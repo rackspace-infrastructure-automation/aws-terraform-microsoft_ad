@@ -17,6 +17,14 @@
 *```
 */
 
+terraform {
+  required_version = ">= 0.12"
+
+  required_providers {
+    aws = ">= 2.1.0"
+  }
+}
+
 resource "aws_directory_service_directory" "msad" {
   alias       = var.alias
   description = var.description
