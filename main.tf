@@ -1,20 +1,21 @@
 /**
-*# aws-terraform-microsoft_ad
+* # aws-terraform-microsoft_ad
 *
-*This module will create a Microsoft Active Directory using AWS Directroy Services.
+* This module will create a Microsoft Active Directory using AWS Directroy Services.
 *
-*## Basic Usage
+* ## Basic Usage
 *
-*```
-*module "msad" {
-*  source     = "git@github.com:rackspace-infrastructure-automation/aws-terraform-microsoft_ad//?ref=v0.0.1"
-*  name       = "corp.example.local"
-*  password   = "${data.aws_kms_secrets.ad_credentials.plaintext["password"]}"
-*  vpc_id     = "${module.vpc.vpc_id}"
-*  subnet_ids = "${module.vpc.private_subnets}"
-*  short_name = "corp"
-*}
-*```
+* ```
+* module "msad" {
+*   source     = "git@github.com:rackspace-infrastructure-automation/aws-terraform-microsoft_ad//?ref=v0.12.0"
+*
+*   name       = "corp.example.local"
+*   password   = "${data.aws_kms_secrets.ad_credentials.plaintext["password"]}"
+*   short_name = "corp"
+*   subnet_ids = "${module.vpc.private_subnets}"
+*   vpc_id     = "${module.vpc.vpc_id}"
+* }
+* ```
 */
 
 terraform {

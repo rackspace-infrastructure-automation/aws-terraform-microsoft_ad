@@ -24,13 +24,13 @@ resource "random_string" "alias_name" {
 }
 
 module "vpc" {
-  source   = "git@github.com:rackspace-infrastructure-automation/aws-terraform-vpc_basenetwork//?ref=v0.12.0"
+  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-vpc_basenetwork//?ref=v0.12.0"
 
-  name     = "ad_vpc"
+  name = "ad_vpc"
 }
 
 module "msad" {
-  source     = "../../module"
+  source = "../../module"
 
   alias      = "${random_string.alias_name.result}-examplead"
   enable_sso = "true"

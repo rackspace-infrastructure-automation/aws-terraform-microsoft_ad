@@ -14,13 +14,13 @@ resource "random_string" "rstring" {
 }
 
 module "vpc" {
-  source   = "git@github.com:rackspace-infrastructure-automation/aws-terraform-vpc_basenetwork//?ref=v0.12.0"
+  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-vpc_basenetwork//?ref=v0.12.0"
 
-  name     = "ad_vpc"
+  name = "ad_vpc"
 }
 
 module "msad" {
-  source     = "git@github.com:rackspace-infrastructure-automation/aws-terraform-microsoft_ad//?ref=v0.12.0"
+  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-microsoft_ad//?ref=v0.12.0"
 
   name       = "corp.example.local"
   password   = random_string.rstring.result
