@@ -1,3 +1,6 @@
+> [!CAUTION]
+> This project is end of life. This repo will be deleted on June 2nd 2025.
+
 # aws-terraform-microsoft\_ad
 
 This module will create a Microsoft Active Directory using AWS Directroy Services.
